@@ -20,20 +20,6 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Age</mat-label>
-      <input matInput formControlName="age" type="number">
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Etablissement</mat-label>
-      <mat-select formControlName="sexe">
-        <mat-option value="homme">Etablissement 3</mat-option>
-        <mat-option value="femme">Etablissement 2</mat-option>
-        <mat-option value="autre">Etablissement 3</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
       <mat-label>Accompagnateur</mat-label>
       <mat-select formControlName="sexe">
         <mat-option value="homme">Homme</mat-option>
@@ -41,15 +27,6 @@
         <mat-option value="autre">Autre</mat-option>
       </mat-select>
     </mat-form-field>
-
-  <mat-form-field appearance="fill">
-    <mat-label>Référent</mat-label>
-    <mat-select formControlName="sexe">
-      <mat-option value="homme">Homme</mat-option>
-      <mat-option value="femme">Femme</mat-option>
-      <mat-option value="autre">Autre</mat-option>
-    </mat-select>
-  </mat-form-field>
 
     <mat-form-field>
       <mat-label>Etablissements</mat-label>
@@ -60,13 +37,6 @@
         }
       </mat-select>
     </mat-form-field>
-
-    <mat-radio-group formControlName="newsletter">
-      <mat-radio-button value="oui">Oui</mat-radio-button>
-      <mat-radio-button value="non">Non</mat-radio-button>
-    </mat-radio-group>
-
-    <mat-checkbox formControlName="terms">J'accepte les termes et conditions</mat-checkbox>
 
     <button id="submit" mat-raised-button type="submit">Soumettre</button>
   </form>
