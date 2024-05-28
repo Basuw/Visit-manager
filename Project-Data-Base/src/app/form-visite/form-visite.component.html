@@ -55,8 +55,8 @@
       <mat-label>Etablissements</mat-label>
       <mat-select formControlName="selectedEtablissementsControl" multiple>
 
-        @for (etablissement of etablissements) {
-          <mat-option [value]="etablissement.value">{{ etablissement.nom }}</mat-option>
+        @for (etablissement of etablissements; track etablissement.id) {
+          <mat-option [value]="etablissement.id">{{ etablissement.nom }}</mat-option>
         }
       </mat-select>
     </mat-form-field>

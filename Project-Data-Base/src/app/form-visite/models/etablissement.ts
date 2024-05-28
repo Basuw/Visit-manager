@@ -1,7 +1,7 @@
 export class Etablissement{
-  private nom: string;
-  private ville: string;
-  private id: number;
+  public nom: string;
+  public ville: string;
+  public id: number;
 
   constructor(nom: string, ville: string, id: number) {
     this.nom = nom;
