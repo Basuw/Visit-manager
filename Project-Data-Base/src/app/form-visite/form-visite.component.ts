@@ -9,7 +9,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { Etablissement } from './models/etablissement';
+import { EtablissementModel } from './models/etablissement.model';
+import {Referant} from "./models/referant.model";
 
 /** @title Simple form field */
 @Component({
@@ -22,15 +23,10 @@ import { Etablissement } from './models/etablissement';
 })
 export class FormVisiteComponent implements OnInit {
   formulaireForm: FormGroup;
-  etablissements: Etablissement[] = [
-    new Etablissement('Etablissement 1', 'Paris', 1),
-    new Etablissement('Etablissement 2', 'Lyon', 2),
-    new Etablissement('Etablissement 3', 'Marseille', 3)
-  ];
-  selected_etablissements: Etablissement[]
-  
+  etablissements: EtablissementModel[] = [];
+  referants: Referant[] = [];
+
   constructor(private fb: FormBuilder) {
-    this.selected_etablissements = [];
     this.formulaireForm = this.fb.group({
       nom: ['', Validators.required],
       date: ['', Validators.required],
@@ -44,7 +40,16 @@ export class FormVisiteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.etablissements = [
+      new EtablissementModel('EtablissementModel 1', 'Paris', 1),
+      new EtablissementModel('EtablissementModel 2', 'Lyon', 2),
+      new EtablissementModel('EtablissementModel 3', 'Marseille', 3)
+    ];
+    this.referants = [
+      new Referant('Referant 1', 'Referant 1', 1, 'monemail@gmail.com'),
+      new Referant('Referant 2', 'Referant 2', 2, 'monemail@gmail.com'),
+      new Referant('Referant 3', 'Referant 3', 3, 'monemail@gmail.com')
+    ];
   }
 
   onSubmit() {

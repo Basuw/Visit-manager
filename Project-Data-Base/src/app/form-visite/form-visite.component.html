@@ -22,9 +22,9 @@
     <mat-form-field appearance="fill">
       <mat-label>Accompagnateur</mat-label>
       <mat-select formControlName="sexe">
-        <mat-option value="homme">Homme</mat-option>
-        <mat-option value="femme">Femme</mat-option>
-        <mat-option value="autre">Autre</mat-option>
+        @for (referant of referants; track referant) {
+          <mat-option [value]="referant.id">{{ referant.prenom }} {{ referant.nom }}</mat-option>
+        }
       </mat-select>
     </mat-form-field>
 
