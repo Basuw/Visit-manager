@@ -1,3 +1,7 @@
+CREATE SEQUENCE Visite_sequence
+   START WITH 1
+   INCREMENT BY 1;
+
 CREATE TABLE Ville(
    idVille INTEGER,
    nom VARCHAR(50) ,
@@ -132,3 +136,4 @@ CREATE TABLE Visite_Etablissement(
     FOREIGN KEY(idVisite) REFERENCES Visite(idVisite),
     FOREIGN KEY(idEtablissement) REFERENCES Etablissement(idEtablissement)
 );
+

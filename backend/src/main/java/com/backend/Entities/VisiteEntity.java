@@ -20,7 +20,7 @@ public class VisiteEntity {
     @GenericGenerator(
             name = "sequence-generator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "visite_sequence"),
+                    @Parameter(name = "sequence_name", value = "Visite_sequence"),
                     @Parameter(name = "initial_value", value = "1"),
                     @Parameter(name = "increment_size", value = "1")
             }
