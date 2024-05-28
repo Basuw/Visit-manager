@@ -1,0 +1,73 @@
+<h1> Création d'une visite</h1>
+<div class="form-container">
+  <form [formGroup]="formulaireForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Nom</mat-label>
+      <input matInput formControlName="nom">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Age</mat-label>
+      <input matInput formControlName="age" type="number">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Etablissement</mat-label>
+      <mat-select formControlName="sexe">
+        <mat-option value="homme">Etablissement 3</mat-option>
+        <mat-option value="femme">Etablissement 2</mat-option>
+        <mat-option value="autre">Etablissement 3</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Accompagnateur</mat-label>
+      <mat-select formControlName="sexe">
+        <mat-option value="homme">Homme</mat-option>
+        <mat-option value="femme">Femme</mat-option>
+        <mat-option value="autre">Autre</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Référent</mat-label>
+    <mat-select formControlName="sexe">
+      <mat-option value="homme">Homme</mat-option>
+      <mat-option value="femme">Femme</mat-option>
+      <mat-option value="autre">Autre</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Etablissements</mat-label>
+      <mat-select formControlName="selectedEtablissementsControl" multiple>
+
+        @for (etablissement of etablissements) {
+          <mat-option [value]="etablissement.value">{{ etablissement.nom }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-radio-group formControlName="newsletter">
+      <mat-radio-button value="oui">Oui</mat-radio-button>
+      <mat-radio-button value="non">Non</mat-radio-button>
+    </mat-radio-group>
+
+    <mat-checkbox formControlName="terms">J'accepte les termes et conditions</mat-checkbox>
+
+    <button id="submit" mat-raised-button type="submit">Soumettre</button>
+  </form>
+</div>
