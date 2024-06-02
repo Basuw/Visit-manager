@@ -9,8 +9,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { EtablissementModel } from './models/etablissement.model';
-import {Referant} from "./models/referant.model";
+import { EtablissementModel } from '../models/etablissement.model';
+import {Referant} from "../models/referant.model";
 
 /** @title Simple form field */
 @Component({

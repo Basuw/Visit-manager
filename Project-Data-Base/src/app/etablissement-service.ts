@@ -1,4 +1,4 @@
-import {EtablissementModel} from "./form-visite/models/etablissement.model";
+import {EtablissementModel} from "./models/etablissement.model";
 
 export class EtablissementService{
 /*    constructor(http) {
