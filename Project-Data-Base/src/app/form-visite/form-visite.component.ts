@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatCheckbox} from "@angular/material/checkbox";
@@ -13,6 +13,7 @@ import { Etablissement } from '../models/etablissement.model';
 import {Referant} from "../models/referant.model";
 import {VisitService} from "../Service/visit-service";
 import {Visit} from "../models/visit.model";
+import {visit} from "@angular/compiler-cli/src/ngtsc/util/src/visitor";
 
 /** @title Simple form field */
 @Component({
@@ -23,7 +24,7 @@ import {Visit} from "../models/visit.model";
   providers: [provideNativeDateAdapter()],
   imports: [MatFormFieldModule, MatInputModule, MatSelectModule, MatRadioGroup, MatCheckbox, MatRadioButton, MatButton, ReactiveFormsModule, MatDatepickerModule, MultiSelectModule,FormsModule],
 })
-export class FormVisiteComponent implements OnInit {
+export class FormVisiteComponent implements OnInit, OnChanges {
   formulaireForm: FormGroup;
   etablissements: Etablissement[] = [];
   referants: Referant[] = [];
@@ -35,7 +36,6 @@ export class FormVisiteComponent implements OnInit {
 
   constructor(private fb: FormBuilder) {
     this.formulaireForm = this.fb.group({
-      nom: ['', Validators.required],
       date: ['', Validators.required],
       Remarques: ['', [Validators.required]],
       age: ['', [Validators.required, Validators.min(1)]],
@@ -69,5 +69,19 @@ export class FormVisiteComponent implements OnInit {
     } else {
       console.error('Formulaire invalide');
     }
+  }
+  ngOnChanges(changes: SimpleChanges) {
+      if (this.visit) {
+        this.formulaireForm.patchValue({
+          date: this.visit.date,
+          Remarques: this.visit.remarques,
+          acc: this.visit.accompagnateur,
+          jeu: this.visit.jeux,
+          niveau: this.visit.niveaux,
+          selectedEtablissementsControl: this.visit.etablissement,
+          selectedReferantControl: this.visit.referant,
+        });
+      }
+
   }
 }
