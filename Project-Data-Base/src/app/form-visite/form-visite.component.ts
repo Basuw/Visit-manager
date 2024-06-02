@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatCheckbox} from "@angular/material/checkbox";
@@ -9,8 +9,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { EtablissementModel } from '../models/etablissement.model';
+import { Etablissement } from '../models/etablissement.model';
 import {Referant} from "../models/referant.model";
+import {VisitService} from "../Service/visit-service";
+import {Visit} from "../models/visit.model";
 
 /** @title Simple form field */
 @Component({
@@ -23,33 +25,42 @@ import {Referant} from "../models/referant.model";
 })
 export class FormVisiteComponent implements OnInit {
   formulaireForm: FormGroup;
-  etablissements: EtablissementModel[] = [];
+  etablissements: Etablissement[] = [];
   referants: Referant[] = [];
+  jeux: string[] = [];
+  niveaux: string[] = [];
+  accompagnateurs: string[] = [];
+  @Input() visitService!: VisitService;
+  @Input() visit?: Visit;
 
   constructor(private fb: FormBuilder) {
     this.formulaireForm = this.fb.group({
       nom: ['', Validators.required],
       date: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      Remarques: ['', [Validators.required]],
       age: ['', [Validators.required, Validators.min(1)]],
-      sexe: ['', Validators.required],
-      newsletter: ['oui', Validators.required],
-      terms: [false, Validators.requiredTrue],
-      selectedEtablissementsControl: [false, Validators.requiredTrue],
+      acc: ['', Validators.required],
+      jeu: ['', Validators.required],
+      niveau: ['', Validators.required],
+      selectedEtablissementsControl: ['', Validators.required],
+      selectedReferantControl: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
     this.etablissements = [
-      new EtablissementModel('EtablissementModel 1', 'Paris', 1),
-      new EtablissementModel('EtablissementModel 2', 'Lyon', 2),
-      new EtablissementModel('EtablissementModel 3', 'Marseille', 3)
+      new Etablissement('Etablissement 1', 'Paris', 1),
+      new Etablissement('Etablissement 2', 'Lyon', 2),
+      new Etablissement('Etablissement 3', 'Marseille', 3)
     ];
     this.referants = [
       new Referant('Referant 1', 'Referant 1', 1, 'monemail@gmail.com'),
       new Referant('Referant 2', 'Referant 2', 2, 'monemail@gmail.com'),
       new Referant('Referant 3', 'Referant 3', 3, 'monemail@gmail.com')
     ];
+    this.jeux = ["Attrapes les tous", "PacIT", "SpiderBinaire"];
+    this.niveaux = ["Niveau 1", "Niveau 2", "Niveau 3"];
+    this.accompagnateurs = ["Lea Simonet", "Franck Pert", "Noa Francois","Simon Carine", "Durand Anais", "Mielcarek Patrick"];
   }
 
   onSubmit() {

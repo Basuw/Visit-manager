@@ -1,4 +1,4 @@
-import {EtablissementModel} from "./models/etablissement.model";
+import {Etablissement} from "../models/etablissement.model";
 
 export class EtablissementService{
 /*    constructor(http) {
@@ -20,13 +20,13 @@ export class EtablissementService{
     deleteEtablissement(id) {
         return this.http.delete(this.url + '/delete/' + id);
     }*/
-  public etablissements: EtablissementModel[] = [];
+  public etablissements: Etablissement[] = [];
 
   constructor() {
     this.etablissements = [
-      new EtablissementModel('EtablissementModel 1', 'Paris', 1),
-      new EtablissementModel('EtablissementModel 2', 'Lyon', 2),
-      new EtablissementModel('EtablissementModel 3', 'Marseille', 3)
+      new Etablissement('Etablissement 1', 'Paris', 1),
+      new Etablissement('Etablissement 2', 'Lyon', 2),
+      new Etablissement('Etablissement 3', 'Marseille', 3)
     ];
   }
 }

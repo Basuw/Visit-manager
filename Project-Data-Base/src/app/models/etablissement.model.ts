@@ -1,4 +1,4 @@
-export class EtablissementModel {
+export class Etablissement {
   public nom: string;
   public ville: string;
   public id: number;
