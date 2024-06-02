@@ -38,7 +38,6 @@ export class FormVisiteComponent implements OnInit, OnChanges {
     this.formulaireForm = this.fb.group({
       date: ['', Validators.required],
       Remarques: ['', [Validators.required]],
-      age: ['', [Validators.required, Validators.min(1)]],
       acc: ['', Validators.required],
       jeu: ['', Validators.required],
       niveau: ['', Validators.required],
@@ -66,6 +65,7 @@ export class FormVisiteComponent implements OnInit, OnChanges {
   onSubmit() {
     if (this.formulaireForm.valid) {
       console.log(this.formulaireForm.value);
+      console.log(this.visit);
     } else {
       console.error('Formulaire invalide');
     }
