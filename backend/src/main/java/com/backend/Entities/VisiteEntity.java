@@ -34,5 +34,6 @@ public class VisiteEntity {
     private String remarques;
 
     @ManyToOne
+    @JoinColumn(name="niveau", referencedColumnName = "niveau")
     private NiveauEntity niveau;
 }

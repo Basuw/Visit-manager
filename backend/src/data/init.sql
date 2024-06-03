@@ -56,45 +56,44 @@ CREATE TABLE Jeu(
 );
 
 CREATE TABLE Visite(
-   idVisite INTEGER,
-   dateVisite DATE,
+   id_visite INTEGER,
+   date_visite DATE,
    manifestation VARCHAR(50) ,
    remarques VARCHAR(100) ,
    niveau VARCHAR(50) ,
-   idEtablissement INTEGER NOT NULL,
-   PRIMARY KEY(idVisite)
+   PRIMARY KEY(id_visite)
 );
 
 CREATE TABLE Equipe(
-   idVisite INTEGER,
+   id_visite INTEGER,
    nom VARCHAR(50) ,
-   PRIMARY KEY(idVisite, nom),
-   FOREIGN KEY(idVisite) REFERENCES Visite(idVisite)
+   PRIMARY KEY(id_visite, nom),
+   FOREIGN KEY(id_visite) REFERENCES Visite(id_visite)
 );
 
 CREATE TABLE Partie(
-   idVisite INTEGER,
+   id_visite INTEGER,
    nom VARCHAR(50) ,
    idJeu INTEGER,
    temps INTEGER,
-   PRIMARY KEY(idVisite, nom, idJeu),
-   FOREIGN KEY(idVisite, nom) REFERENCES Equipe(idVisite, nom),
+   PRIMARY KEY(id_visite, nom, idJeu),
+   FOREIGN KEY(id_visite, nom) REFERENCES Equipe(id_visite, nom),
    FOREIGN KEY(idJeu) REFERENCES Jeu(idJeu)
 );
 
 CREATE TABLE Accompagne(
    IdAccompagnateur INTEGER,
-   idVisite INTEGER,
-   PRIMARY KEY(IdAccompagnateur, idVisite),
+   id_visite INTEGER,
+   PRIMARY KEY(IdAccompagnateur, id_visite),
    FOREIGN KEY(IdAccompagnateur) REFERENCES Accompagnateur(IdAccompagnateur),
-   FOREIGN KEY(idVisite) REFERENCES Visite(idVisite)
+   FOREIGN KEY(id_visite) REFERENCES Visite(id_visite)
 );
 
 CREATE TABLE Referent(
-   idVisite INTEGER,
+   id_visite INTEGER,
    idProfesseur INTEGER,
-   PRIMARY KEY(idVisite, idProfesseur),
-   FOREIGN KEY(idVisite) REFERENCES Visite(idVisite),
+   PRIMARY KEY(id_visite, idProfesseur),
+   FOREIGN KEY(id_visite) REFERENCES Visite(id_visite),
    FOREIGN KEY(idProfesseur) REFERENCES Professeur(idProfesseur)
 );
 
@@ -116,10 +115,10 @@ CREATE TABLE Aborde(
 
 CREATE TABLE Contient(
    idJeu INTEGER,
-   idVisite INTEGER,
-   PRIMARY KEY(idJeu, idVisite),
+   id_visite INTEGER,
+   PRIMARY KEY(idJeu, id_visite),
    FOREIGN KEY(idJeu) REFERENCES Jeu(idJeu),
-   FOREIGN KEY(idVisite) REFERENCES Visite(idVisite)
+   FOREIGN KEY(id_visite) REFERENCES Visite(id_visite)
 );
 
 CREATE TABLE Jeu_Professeur(
@@ -131,9 +130,12 @@ CREATE TABLE Jeu_Professeur(
 );
 
 CREATE TABLE Visite_Etablissement(
-    idVisite INTEGER,
+    id_visite INTEGER,
     idEtablissement INTEGER,
-    FOREIGN KEY(idVisite) REFERENCES Visite(idVisite),
+    FOREIGN KEY(id_visite) REFERENCES Visite(id_visite),
     FOREIGN KEY(idEtablissement) REFERENCES Etablissement(idEtablissement)
 );
 
+INSERT INTO Niveau(niveau) VALUES ('college');
+INSERT INTO Niveau(niveau) VALUES ('lycee');
+INSERT INTO Niveau(niveau) VALUES ('superieur');

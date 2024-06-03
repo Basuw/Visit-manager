@@ -1,5 +1,7 @@
 package com.backend.mapper.common;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Interface to use when mapping a dto to an entity or an entity to a dto.
  * 
