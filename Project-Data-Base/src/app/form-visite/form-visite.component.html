@@ -1,0 +1,64 @@
+<h1> Création d'une visite</h1>
+<div class="form-container">
+  <form [formGroup]="formulaireForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="date">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Remarques</mat-label>
+      <input matInput formControlName="Remarques">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Accompagnateur</mat-label>
+      <input matInput formControlName="acc">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Etablissements</mat-label>
+      <mat-select formControlName="selectedEtablissementsControl" multiple>
+
+        @for (etablissement of etablissements; track etablissement.id) {
+          <mat-option [value]="etablissement.id">{{ etablissement.nom }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Référant</mat-label>
+      <mat-select formControlName="selectedReferantControl">
+        @for (acc of accompagnateurs; track acc) {
+          <mat-option [value]="acc">{{ acc }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Jeux</mat-label>
+      <mat-select formControlName="jeu">
+        @for (jeu of jeux; track jeu) {
+          <mat-option [value]="jeu">{{ jeu }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Niveaux</mat-label>
+      <mat-select formControlName="niveau" multiple>
+        @for (niveau of niveaux; track niveau) {
+          <mat-option [value]="niveau">{{ niveau }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <button id="submit" mat-raised-button type="submit">Soumettre</button>
+  </form>
+
+  <h1>{{visit?.accompagnateur}}</h1>
+</div>

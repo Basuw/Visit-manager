@@ -1,0 +1,31 @@
+.form-container {
+  max-width: 800px;
+  max-height: 400px;
+  margin: 0 auto;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+mat-form-field {
+  margin-left: 16px;
+
+}
+h1 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+mat-radio-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+#submit {
+  margin-top: 16px;
+  display: block;
+}
+table {
+  width: 100%;
+}
