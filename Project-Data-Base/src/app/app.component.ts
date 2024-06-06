@@ -15,7 +15,6 @@ import {Visit} from "./models/visit.model";
 })
 export class AppComponent {
   title = 'Project-Data-Base';
-  visitService = new VisitService();
   selectedVisit?: Visit;
 
   editVisit(visit: Visit) {

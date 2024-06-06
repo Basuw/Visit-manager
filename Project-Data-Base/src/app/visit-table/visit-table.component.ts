@@ -22,14 +22,25 @@ import {MatIconButton} from "@angular/material/button";
 })
 export class VisitTableComponent implements OnInit, AfterViewInit{
   displayedColumns: string[] = ['id', 'date', 'etablissement','referant','accompagnateur','remarques','jeux','niveaux','star'];
-  dataSource = new MatTableDataSource<Visit>(new VisitService().visits);
+  dataSource!: MatTableDataSource<Visit>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @Input() visitService!: VisitService;
   @Output() editVisit = new EventEmitter<Visit>();
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private visitService: VisitService) {}
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.visitService.getVisits().subscribe({
+      next: (data: Visit[]) => {
+        this.dataSource = new MatTableDataSource<Visit>(data);
+      },
+      error: (error) => {
+        console.error('Error fetching visits:', error);
+      },
+      complete: () => {
+        console.log('visits fetch complete');
+      }
+    });
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

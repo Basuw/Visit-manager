@@ -6,9 +6,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.Services.VisiteService;
 import com.backend.dto.VisiteDTO;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping(value="visite/")
 public class VisiteController{
 
@@ -27,6 +31,11 @@ public class VisiteController{
     public ResponseEntity<VisiteDTO> get(@PathVariable int id) {
         VisiteDTO dto = service.findByID(id);
         return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("all")
+    public ResponseEntity<List<VisiteDTO>> getAll() {
+        return ResponseEntity.ok(service.findAll());
     }
     
     @PostMapping("")
