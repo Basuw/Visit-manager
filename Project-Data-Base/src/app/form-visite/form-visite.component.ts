@@ -18,6 +18,8 @@ import { EtablissementService } from '../Service/etablissement-service';
 import { Niveau } from '../models/niveau-model';
 import { NiveauService } from '../Service/niveau-service';
 import { ReferantService } from '../Service/referant-service';
+import { Jeu } from '../models/jeu-model';
+import { JeuService } from '../Service/jeu-service';
 
 /** @title Simple form field */
 @Component({
@@ -32,21 +34,21 @@ export class FormVisiteComponent implements OnInit, OnChanges {
   formulaireForm: FormGroup;
   etablissements: Etablissement[] = [];
   referants: Referant[] = [];
-  jeux: string[] = [];
+  jeux: Jeu[] = [];
   niveaux: Niveau[] = [];
-  accompagnateurs: string[] = [];
   @Input() visitService!: VisitService;
   @Input() visit?: Visit;
 
-  constructor(private fb: FormBuilder, private etablissementService: EtablissementService, private niveauService: NiveauService, private referantService: ReferantService) {
+  constructor(private fb: FormBuilder, private etablissementService: EtablissementService, private niveauService: NiveauService, private referantService: ReferantService, private jeuService: JeuService) {
     this.formulaireForm = this.fb.group({
       date: ['', Validators.required],
-      Remarques: ['', [Validators.required]],
+      Remarques: ['', []],
       acc: ['', Validators.required],
       jeu: ['', Validators.required],
       niveau: ['', Validators.required],
       selectedEtablissementsControl: ['', Validators.required],
       selectedReferantControl: ['', Validators.required],
+      manifestation : ['', Validators.required]
     });
   }
 
@@ -86,14 +88,23 @@ export class FormVisiteComponent implements OnInit, OnChanges {
         console.log('Niveaux fetch complete');
       }
     });
-    this.jeux = ["Attrapes les tous", "PacIT", "SpiderBinaire"];
-    this.accompagnateurs = ["Lea Simonet", "Franck Pert", "Noa Francois","Simon Carine", "Durand Anais", "Mielcarek Patrick"];
+    this.jeuService.getAllJeux().subscribe({
+      next: (data: Jeu[]) => {
+        this.jeux = data;
+      },
+      error: (error) => {
+        console.error('Error fetching niveaux:', error);
+      },
+      complete: () => {
+        console.log('Niveaux fetch complete');
+      }
+    });
   }
 
   onSubmit() {
     if (this.formulaireForm.valid) {
-      console.log(this.formulaireForm.value);
-      console.log(this.visit);
+      const formValues = this.formulaireForm.value;
+      this.visit = new Visit(null, formValues.date, formValues.selectedEtablissementsControl, formValues.selectedReferantControl, formValues.acc, formValues.Remarques, formValues.jeux, formValues.niveaux, formValues.manifestation)
     } else {
       console.error('Formulaire invalide');
     }
@@ -105,7 +116,7 @@ export class FormVisiteComponent implements OnInit, OnChanges {
           Remarques: this.visit.remarques,
           acc: this.visit.accompagnateur,
           jeu: this.visit.jeux,
-          niveau: this.visit.niveaux,
+          niveau: this.visit.niveau,
           selectedEtablissementsControl: this.visit.etablissement,
           selectedReferantControl: this.visit.referant,
         });

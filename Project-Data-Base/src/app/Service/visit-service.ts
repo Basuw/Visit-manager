@@ -9,19 +9,20 @@ import { Observable } from "rxjs";
   providedIn: 'root'
 })
 export class VisitService{
-    private url: String;
+    private url: string;
 
     constructor(private http: HttpClient) {
       this.url = 'http://localhost:8080/visite/'
     }
 
-  public addVisit(visit: Visit) {
+  public addVisit(visit?: Visit) {
+    this.http.post(this.url, visit);
   }
   public updateVisit(visit: Visit) {
 
   }
   public deteteVisit(element: Visit) {
-    this.http.delete(this.url + element.id.toString());
+    this.http.delete(this.url + element.id?.toString());
   }
   public getVisitById(id: number) {
 

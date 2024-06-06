@@ -15,13 +15,18 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
+      <mat-label>Manifestation</mat-label>
+      <input matInput formControlName="manifestation">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
       <mat-label>Accompagnateur</mat-label>
       <input matInput formControlName="acc">
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Etablissements</mat-label>
-      <mat-select formControlName="selectedEtablissementsControl" multiple>
+      <mat-select formControlName="selectedEtablissementsControl">
 
         @for (etablissement of etablissements; track etablissement.id) {
           <mat-option [value]="etablissement.id">{{ etablissement.nom }}</mat-option>
@@ -42,15 +47,15 @@
     <mat-form-field appearance="fill">
       <mat-label>Jeux</mat-label>
       <mat-select formControlName="jeu">
-        @for (jeu of jeux; track jeu) {
-          <mat-option [value]="jeu">{{ jeu }}</mat-option>
+        @for (jeu of jeux; track jeu.idJeu) {
+          <mat-option [value]="jeu">{{ jeu.nom }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Niveaux</mat-label>
-      <mat-select formControlName="niveau" multiple>
+      <mat-select formControlName="niveau">
         @for (niveau of niveaux; track niveau) {
           <mat-option [value]="niveau.niveau">{{ niveau.niveau }}</mat-option>
         }

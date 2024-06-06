@@ -3,13 +3,14 @@ import {Referant} from "./referant.model";
 
 export class Visit{
   constructor(
-    public id: number,
+    public id: number | null,
     public date: Date,
     public etablissement: Etablissement,
     public referant: Referant,
     public accompagnateur: string,
     public remarques: string,
     public jeux : string[],
-    public niveaux : string[]
+    public niveau : string,
+    public manifestation: string
   ) { }
 }

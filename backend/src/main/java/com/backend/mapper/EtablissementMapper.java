@@ -6,7 +6,7 @@ import org.mapstruct.Mapping;
 import com.backend.Entities.EtablissementEntity;
 import com.backend.dto.EtablissementDTO;
 
-@Mapper(componentModel = "spring", uses = { NiveauMapper.class })
+@Mapper(componentModel = "spring")
 public interface EtablissementMapper extends com.backend.mapper.common.Mapper<EtablissementDTO, EtablissementEntity>{
 
     @Override

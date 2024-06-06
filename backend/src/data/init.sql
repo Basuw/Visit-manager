@@ -48,11 +48,11 @@ CREATE TABLE Etablissement(
 );
 
 CREATE TABLE Jeu(
-   idJeu INTEGER,
+   id_jeu INTEGER,
    nom VARCHAR(50) ,
    dateAjout DATE,
    id_professeur INTEGER NOT NULL,
-   PRIMARY KEY(idJeu)
+   PRIMARY KEY(id_jeu)
 );
 
 CREATE TABLE Visite(
@@ -74,11 +74,11 @@ CREATE TABLE Equipe(
 CREATE TABLE Partie(
    id_visite INTEGER,
    nom VARCHAR(50) ,
-   idJeu INTEGER,
+   id_jeu INTEGER,
    temps INTEGER,
-   PRIMARY KEY(id_visite, nom, idJeu),
+   PRIMARY KEY(id_visite, nom, id_jeu),
    FOREIGN KEY(id_visite, nom) REFERENCES Equipe(id_visite, nom),
-   FOREIGN KEY(idJeu) REFERENCES Jeu(idJeu)
+   FOREIGN KEY(id_jeu) REFERENCES Jeu(id_jeu)
 );
 
 CREATE TABLE Accompagne(
@@ -98,34 +98,34 @@ CREATE TABLE Referent(
 );
 
 CREATE TABLE Est_adapte(
-   idJeu INTEGER,
+   id_jeu INTEGER,
    niveau VARCHAR(50) ,
-   PRIMARY KEY(idJeu, niveau),
-   FOREIGN KEY(idJeu) REFERENCES Jeu(idJeu),
+   PRIMARY KEY(id_jeu, niveau),
+   FOREIGN KEY(id_jeu) REFERENCES Jeu(id_jeu),
    FOREIGN KEY(niveau) REFERENCES Niveau(niveau)
 );
 
 CREATE TABLE Aborde(
-   idJeu INTEGER,
+   id_jeu INTEGER,
    thematique VARCHAR(50) ,
-   PRIMARY KEY(idJeu, thematique),
-   FOREIGN KEY(idJeu) REFERENCES Jeu(idJeu),
+   PRIMARY KEY(id_jeu, thematique),
+   FOREIGN KEY(id_jeu) REFERENCES Jeu(id_jeu),
    FOREIGN KEY(thematique) REFERENCES Thematique(thematique)
 );
 
 CREATE TABLE Contient(
-   idJeu INTEGER,
+   id_jeu INTEGER,
    id_visite INTEGER,
-   PRIMARY KEY(idJeu, id_visite),
-   FOREIGN KEY(idJeu) REFERENCES Jeu(idJeu),
+   PRIMARY KEY(id_jeu, id_visite),
+   FOREIGN KEY(id_jeu) REFERENCES Jeu(id_jeu),
    FOREIGN KEY(id_visite) REFERENCES Visite(id_visite)
 );
 
 CREATE TABLE Jeu_Professeur(
-    idJeu INTEGER,
+    id_jeu INTEGER,
     id_professeur INTEGER,
-    PRIMARY KEY(idJeu, id_professeur),
-    FOREIGN KEY(idJeu) REFERENCES Jeu(idJeu),
+    PRIMARY KEY(id_jeu, id_professeur),
+    FOREIGN KEY(id_jeu) REFERENCES Jeu(id_jeu),
     FOREIGN KEY(id_professeur) REFERENCES Professeur(id_professeur)
 );
 
@@ -163,3 +163,9 @@ INSERT INTO Etablissement (id_etablissement, nom, id_ville) VALUES (9, 'Ecole d 
 INSERT INTO Professeur (id_professeur, nom, prenom) VALUES (0, 'PASTOR', 'Lucas');
 INSERT INTO Professeur (id_professeur, nom, prenom) VALUES (1, 'CHEMINAT', 'Michel');
 INSERT INTO Professeur (id_professeur, nom, prenom) VALUES (2, 'YON', 'Loïc');
+
+INSERT INTO Jeu (id_jeu, nom, dateAjout, id_professeur) VALUES (1, 'Code Master', '2024-01-15', 0);
+INSERT INTO Jeu (id_jeu, nom, dateAjout, id_professeur) VALUES (2, 'Bug Hunter', '2024-02-20', 0);
+INSERT INTO Jeu (id_jeu, nom, dateAjout, id_professeur) VALUES (3, 'AI Conquest', '2024-03-05', 0);
+INSERT INTO Jeu (id_jeu, nom, dateAjout, id_professeur) VALUES (4, 'Network Tycoon', '2024-04-10', 0);
+INSERT INTO Jeu (id_jeu, nom, dateAjout, id_professeur) VALUES (5, 'Cyber Defense', '2024-05-15', 0);
