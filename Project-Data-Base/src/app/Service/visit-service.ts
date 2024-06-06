@@ -15,8 +15,9 @@ export class VisitService{
       this.url = 'http://localhost:8080/visite/'
     }
 
-  public addVisit(visit?: Visit) {
-    this.http.post(this.url, visit);
+  public addVisit(visit: Visit): Observable<Visit> {
+    console.log(visit);
+    return this.http.post<Visit>(this.url, visit);
   }
   public updateVisit(visit: Visit) {
 

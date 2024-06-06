@@ -36,15 +36,14 @@ export class FormVisiteComponent implements OnInit, OnChanges {
   referants: Referant[] = [];
   jeux: Jeu[] = [];
   niveaux: Niveau[] = [];
-  @Input() visitService!: VisitService;
   @Input() visit?: Visit;
 
-  constructor(private fb: FormBuilder, private etablissementService: EtablissementService, private niveauService: NiveauService, private referantService: ReferantService, private jeuService: JeuService) {
+  constructor(private fb: FormBuilder, private etablissementService: EtablissementService, private niveauService: NiveauService, private referantService: ReferantService, private jeuService: JeuService, private visitService: VisitService) {
     this.formulaireForm = this.fb.group({
       date: ['', Validators.required],
       Remarques: ['', []],
       acc: ['', Validators.required],
-      jeu: ['', Validators.required],
+      jeux: ['', Validators.required],
       niveau: ['', Validators.required],
       selectedEtablissementsControl: ['', Validators.required],
       selectedReferantControl: ['', Validators.required],
@@ -104,7 +103,18 @@ export class FormVisiteComponent implements OnInit, OnChanges {
   onSubmit() {
     if (this.formulaireForm.valid) {
       const formValues = this.formulaireForm.value;
-      this.visit = new Visit(null, formValues.date, formValues.selectedEtablissementsControl, formValues.selectedReferantControl, formValues.acc, formValues.Remarques, formValues.jeux, formValues.niveaux, formValues.manifestation)
+      this.visit = new Visit(null, formValues.date.toISOString().split('T')[0], formValues.selectedEtablissementsControl, formValues.selectedReferantControl, formValues.acc, formValues.Remarques, formValues.jeux, formValues.niveau, formValues.manifestation)
+      this.visitService.addVisit(this.visit).subscribe({
+        next: (data: Visit) => {
+          this.visit = data;
+        },
+        error: (error) => {
+          console.error('Error fetching niveaux:', error);
+        },
+        complete: () => {
+          console.log('Niveaux fetch complete');
+        }
+      });
     } else {
       console.error('Formulaire invalide');
     }

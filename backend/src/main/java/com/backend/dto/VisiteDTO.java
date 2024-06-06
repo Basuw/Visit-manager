@@ -12,7 +12,7 @@ import lombok.Data;
 public class VisiteDTO {
 
     @Schema(accessMode = Schema.AccessMode.READ_ONLY)
-    private Integer idVisite = null;
+    private Integer id = null;
 
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
@@ -25,7 +25,9 @@ public class VisiteDTO {
 
     private EtablissementDTO etablissement;
 
-    private ProfesseurDTO referent;
+    private ProfesseurDTO referant;
 
     private List<JeuDTO> jeux;
+
+    private String accompagnateur;
 }
