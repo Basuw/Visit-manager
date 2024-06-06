@@ -20,11 +20,11 @@ CREATE TABLE Accompagnateur(
 );
 
 CREATE TABLE Professeur(
-   idProfesseur INTEGER,
+   id_professeur INTEGER,
    prenom VARCHAR(50) ,
    nom VARCHAR(50) ,
    mail VARCHAR(50) ,
-   PRIMARY KEY(idProfesseur)
+   PRIMARY KEY(id_professeur)
 );
 
 CREATE TABLE Niveau(
@@ -51,7 +51,7 @@ CREATE TABLE Jeu(
    idJeu INTEGER,
    nom VARCHAR(50) ,
    dateAjout DATE,
-   idProfesseur INTEGER NOT NULL,
+   id_professeur INTEGER NOT NULL,
    PRIMARY KEY(idJeu)
 );
 
@@ -91,10 +91,10 @@ CREATE TABLE Accompagne(
 
 CREATE TABLE Referent(
    id_visite INTEGER,
-   idProfesseur INTEGER,
-   PRIMARY KEY(id_visite, idProfesseur),
+   id_professeur INTEGER,
+   PRIMARY KEY(id_visite, id_professeur),
    FOREIGN KEY(id_visite) REFERENCES Visite(id_visite),
-   FOREIGN KEY(idProfesseur) REFERENCES Professeur(idProfesseur)
+   FOREIGN KEY(id_professeur) REFERENCES Professeur(id_professeur)
 );
 
 CREATE TABLE Est_adapte(
@@ -123,10 +123,10 @@ CREATE TABLE Contient(
 
 CREATE TABLE Jeu_Professeur(
     idJeu INTEGER,
-    idProfesseur INTEGER,
-    PRIMARY KEY(idJeu, idProfesseur),
+    id_professeur INTEGER,
+    PRIMARY KEY(idJeu, id_professeur),
     FOREIGN KEY(idJeu) REFERENCES Jeu(idJeu),
-    FOREIGN KEY(idProfesseur) REFERENCES Professeur(idProfesseur)
+    FOREIGN KEY(id_professeur) REFERENCES Professeur(id_professeur)
 );
 
 CREATE TABLE Visite_Etablissement(
