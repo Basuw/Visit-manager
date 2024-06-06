@@ -1,0 +1,76 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-table">
+    <!-- Name Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.date | date:'dd/MM/yyyy'}} </td>
+    </ng-container>
+
+    <!-- etablissement Column -->
+    <ng-container matColumnDef="etablissement">
+      <th mat-header-cell *matHeaderCellDef> Etablissement </th>
+      <td mat-cell *matCellDef="let element"> {{element.etablissement?.nom}} </td>
+    </ng-container>
+
+    <!-- referant Column -->
+    <ng-container matColumnDef="referant">
+      <th mat-header-cell *matHeaderCellDef> Référant </th>
+      <td mat-cell *matCellDef="let element"> {{element.referant?.nom}} {{element.referant?.prenom}}</td>
+    </ng-container>
+
+    <!-- accompagnateur Column -->
+    <ng-container matColumnDef="accompagnateur">
+      <th mat-header-cell *matHeaderCellDef> Accompagnateur </th>
+      <td mat-cell *matCellDef="let element"> {{element.accompagnateur}} </td>
+    </ng-container>
+
+    <!-- remarques Column -->
+    <ng-container matColumnDef="remarques">
+      <th mat-header-cell *matHeaderCellDef> Remarques </th>
+      <td mat-cell *matCellDef="let element"> {{element.remarques}} </td>
+    </ng-container>
+
+    <!-- jeux Column -->
+    <ng-container matColumnDef="jeux">
+      <th mat-header-cell *matHeaderCellDef> Jeux </th>
+      <td mat-cell *matCellDef="let element"> {{element.jeux}} </td>
+    </ng-container>
+
+    <!-- niveaux Column -->
+    <ng-container matColumnDef="niveaux">
+      <th mat-header-cell *matHeaderCellDef> Niveaux </th>
+      <td mat-cell *matCellDef="let element"> {{element.niveaux}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="star" stickyEnd>
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="edit(element)">
+            <mat-icon>edit</mat-icon>
+            <span>Modifier</span>
+          </button>
+          <button mat-menu-item (click)="delete(element)">
+            <mat-icon>delete</mat-icon>
+            <span>Supprimer</span>
+          </button>
+        </mat-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
