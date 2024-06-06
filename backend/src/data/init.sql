@@ -139,3 +139,23 @@ CREATE TABLE Visite_Etablissement(
 INSERT INTO Niveau(niveau) VALUES ('college');
 INSERT INTO Niveau(niveau) VALUES ('lycee');
 INSERT INTO Niveau(niveau) VALUES ('superieur');
+
+-- Ajout des villes autour de Clermont-Ferrand
+INSERT INTO Ville (idVille, nom, departement) VALUES (1, 'Clermont-Ferrand', 63);
+INSERT INTO Ville (idVille, nom, departement) VALUES (2, 'Chamalières', 63);
+INSERT INTO Ville (idVille, nom, departement) VALUES (3, 'Aubière', 63);
+INSERT INTO Ville (idVille, nom, departement) VALUES (4, 'Cournon-d Auvergne', 63);
+INSERT INTO Ville (idVille, nom, departement) VALUES (5, 'Riom', 63);
+
+-- Ajout des établissements
+INSERT INTO Etablissement (idEtablissement, nom, idVille) VALUES (1, 'Collège Blaise Pascal', 1);
+INSERT INTO Etablissement (idEtablissement, nom, idVille) VALUES (2, 'Lycée Général Desaix', 1);
+INSERT INTO Etablissement (idEtablissement, nom, idVille) VALUES (3, 'Université Clermont Auvergne', 1);
+
+INSERT INTO Etablissement (idEtablissement, nom, idVille) VALUES (4, 'Collège Saint-Alyre', 2);
+INSERT INTO Etablissement (idEtablissement, nom, idVille) VALUES (5, 'Lycée Sainte-Thérèse', 2);
+INSERT INTO Etablissement (idEtablissement, nom, idVille) VALUES (6, 'Institut des Sciences de la Vie', 2);
+
+INSERT INTO Etablissement (idEtablissement, nom, idVille) VALUES (7, 'Collège Gérard Philipe', 3);
+INSERT INTO Etablissement (idEtablissement, nom, idVille) VALUES (8, 'Lycée Pierre de Fermat', 3);
+INSERT INTO Etablissement (idEtablissement, nom, idVille) VALUES (9, 'Ecole d Ingénieurs Sigma', 3);
