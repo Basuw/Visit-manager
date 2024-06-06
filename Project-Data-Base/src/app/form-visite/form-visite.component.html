@@ -30,10 +30,10 @@
     </mat-form-field>
 
     <mat-form-field>
-      <mat-label>Référant</mat-label>
+      <mat-label>Référent</mat-label>
       <mat-select formControlName="selectedReferantControl">
-        @for (acc of accompagnateurs; track acc) {
-          <mat-option [value]="acc">{{ acc }}</mat-option>
+        @for (ref of referants; track ref.id) {
+          <mat-option [value]="ref">{{ ref.nom }} {{ ref.prenom }}</mat-option>
         }
       </mat-select>
     </mat-form-field>

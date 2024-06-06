@@ -159,3 +159,7 @@ INSERT INTO Etablissement (id_etablissement, nom, id_ville) VALUES (6, 'Institut
 INSERT INTO Etablissement (id_etablissement, nom, id_ville) VALUES (7, 'Collège Gérard Philipe', 3);
 INSERT INTO Etablissement (id_etablissement, nom, id_ville) VALUES (8, 'Lycée Pierre de Fermat', 3);
 INSERT INTO Etablissement (id_etablissement, nom, id_ville) VALUES (9, 'Ecole d Ingénieurs Sigma', 3);
+
+INSERT INTO Professeur (id_professeur, nom, prenom) VALUES (0, 'PASTOR', 'Lucas');
+INSERT INTO Professeur (id_professeur, nom, prenom) VALUES (1, 'CHEMINAT', 'Michel');
+INSERT INTO Professeur (id_professeur, nom, prenom) VALUES (2, 'YON', 'Loïc');
