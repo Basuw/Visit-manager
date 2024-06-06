@@ -1,32 +1,19 @@
+import { HttpClient } from "@angular/common/http";
 import {Etablissement} from "../models/etablissement.model";
+import { Observable } from "rxjs";
+import { Injectable } from "@angular/core";
 
+@Injectable({
+  providedIn: 'root'
+})
 export class EtablissementService{
-/*    constructor(http) {
-        this.http = http;
-        this.url = 'http://localhost:8080/etablissement';
-    }
-    getAllEtablissements() {
-        return this.http.get(this.url + '/all');
-    }
-    getEtablissementById(id) {
-        return this.http.get(this.url + '/get/' + id);
-    }
-    addEtablissement(etablissement) {
-        return this.http.post(this.url + '/add', etablissement);
-    }
-    updateEtablissement(etablissement) {
-        return this.http.put(this.url + '/update', etablissement);
-    }
-    deleteEtablissement(id) {
-        return this.http.delete(this.url + '/delete/' + id);
-    }*/
-  public etablissements: Etablissement[] = [];
+  private url: string;
 
-  constructor() {
-    this.etablissements = [
-      new Etablissement('Etablissement 1', 'Paris', 1),
-      new Etablissement('Etablissement 2', 'Lyon', 2),
-      new Etablissement('Etablissement 3', 'Marseille', 3)
-    ];
+  getAllEtablissements(): Observable<Etablissement[]> {
+    return this.http.get<Etablissement[]>(this.url + '/all');
+}
+
+  constructor(private http: HttpClient) {
+    this.url = 'http://localhost:8080/etablissement';
   }
 }

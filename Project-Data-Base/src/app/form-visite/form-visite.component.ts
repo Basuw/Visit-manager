@@ -14,6 +14,7 @@ import {Referant} from "../models/referant.model";
 import {VisitService} from "../Service/visit-service";
 import {Visit} from "../models/visit.model";
 import {visit} from "@angular/compiler-cli/src/ngtsc/util/src/visitor";
+import { EtablissementService } from '../Service/etablissement-service';
 
 /** @title Simple form field */
 @Component({
@@ -34,7 +35,7 @@ export class FormVisiteComponent implements OnInit, OnChanges {
   @Input() visitService!: VisitService;
   @Input() visit?: Visit;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private etablissementService: EtablissementService) {
     this.formulaireForm = this.fb.group({
       date: ['', Validators.required],
       Remarques: ['', [Validators.required]],
@@ -46,12 +47,20 @@ export class FormVisiteComponent implements OnInit, OnChanges {
     });
   }
 
+  
   ngOnInit(): void {
-    this.etablissements = [
-      new Etablissement('Etablissement 1', 'Paris', 1),
-      new Etablissement('Etablissement 2', 'Lyon', 2),
-      new Etablissement('Etablissement 3', 'Marseille', 3)
-    ];
+    this.etablissementService.getAllEtablissements().subscribe({
+      next: (data: Etablissement[]) => {
+        this.etablissements = data;
+      },
+      error: (error) => {
+        console.error('Error fetching etablissements:', error);
+      },
+      complete: () => {
+        console.log('Etablissements fetch complete');
+        console.log(this.etablissements);
+      }
+    });
     this.referants = [
       new Referant('Referant 1', 'Referant 1', 1, 'monemail@gmail.com'),
       new Referant('Referant 2', 'Referant 2', 2, 'monemail@gmail.com'),

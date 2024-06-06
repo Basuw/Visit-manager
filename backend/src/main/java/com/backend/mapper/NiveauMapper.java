@@ -1,4 +1,4 @@
-package com.backend.mapper.common;
+package com.backend.mapper;
 
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;

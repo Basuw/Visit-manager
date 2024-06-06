@@ -26,10 +26,20 @@ export class EtablissementTableComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private etablissementService: EtablissementService) {}
 
-  ngOnInit() {
-    this.dataSource = new MatTableDataSource<Etablissement>(new EtablissementService().etablissements);
+  ngOnInit(): void {
+    this.etablissementService.getAllEtablissements().subscribe({
+      next: (data: Etablissement[]) => {
+        this.dataSource = new MatTableDataSource(data);
+      },
+      error: (error) => {
+        console.error('Error fetching etablissements:', error);
+      },
+      complete: () => {
+        console.log('Etablissements fetch complete');
+      }
+    });
   }
 
   ngAfterViewInit() {
