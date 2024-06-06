@@ -52,7 +52,7 @@
       <mat-label>Niveaux</mat-label>
       <mat-select formControlName="niveau" multiple>
         @for (niveau of niveaux; track niveau) {
-          <mat-option [value]="niveau">{{ niveau }}</mat-option>
+          <mat-option [value]="niveau.niveau">{{ niveau.niveau }}</mat-option>
         }
       </mat-select>
     </mat-form-field>

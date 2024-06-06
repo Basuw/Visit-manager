@@ -15,6 +15,8 @@ import {VisitService} from "../Service/visit-service";
 import {Visit} from "../models/visit.model";
 import {visit} from "@angular/compiler-cli/src/ngtsc/util/src/visitor";
 import { EtablissementService } from '../Service/etablissement-service';
+import { Niveau } from '../models/niveau-model';
+import { NiveauService } from '../Service/niveau-service';
 
 /** @title Simple form field */
 @Component({
@@ -30,12 +32,12 @@ export class FormVisiteComponent implements OnInit, OnChanges {
   etablissements: Etablissement[] = [];
   referants: Referant[] = [];
   jeux: string[] = [];
-  niveaux: string[] = [];
+  niveaux: Niveau[] = [];
   accompagnateurs: string[] = [];
   @Input() visitService!: VisitService;
   @Input() visit?: Visit;
 
-  constructor(private fb: FormBuilder, private etablissementService: EtablissementService) {
+  constructor(private fb: FormBuilder, private etablissementService: EtablissementService, private niveauService: NiveauService) {
     this.formulaireForm = this.fb.group({
       date: ['', Validators.required],
       Remarques: ['', [Validators.required]],
@@ -61,13 +63,23 @@ export class FormVisiteComponent implements OnInit, OnChanges {
         console.log(this.etablissements);
       }
     });
+    this.niveauService.getAll().subscribe({
+      next: (data: Niveau[]) => {
+        this.niveaux = data;
+      },
+      error: (error) => {
+        console.error('Error fetching niveaux:', error);
+      },
+      complete: () => {
+        console.log('Niveaux fetch complete');
+      }
+    });
     this.referants = [
       new Referant('Referant 1', 'Referant 1', 1, 'monemail@gmail.com'),
       new Referant('Referant 2', 'Referant 2', 2, 'monemail@gmail.com'),
       new Referant('Referant 3', 'Referant 3', 3, 'monemail@gmail.com')
     ];
     this.jeux = ["Attrapes les tous", "PacIT", "SpiderBinaire"];
-    this.niveaux = ["Niveau 1", "Niveau 2", "Niveau 3"];
     this.accompagnateurs = ["Lea Simonet", "Franck Pert", "Noa Francois","Simon Carine", "Durand Anais", "Mielcarek Patrick"];
   }
 
