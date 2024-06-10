@@ -13,7 +13,6 @@ import { Etablissement } from '../models/etablissement.model';
 import {Referant} from "../models/referant.model";
 import {VisitService} from "../Service/visit-service";
 import {Visit} from "../models/visit.model";
-import {visit} from "@angular/compiler-cli/src/ngtsc/util/src/visitor";
 import { EtablissementService } from '../Service/etablissement-service';
 import { Niveau } from '../models/niveau-model';
 import { NiveauService } from '../Service/niveau-service';
@@ -103,7 +102,9 @@ export class FormVisiteComponent implements OnInit, OnChanges {
   onSubmit() {
     if (this.formulaireForm.valid) {
       const formValues = this.formulaireForm.value;
-      this.visit = new Visit(null, formValues.date.toISOString().split('T')[0], formValues.selectedEtablissementsControl, formValues.selectedReferantControl, formValues.acc, formValues.Remarques, formValues.jeux, formValues.niveau, formValues.manifestation)
+      const referantsSelected: Referant[] = [formValues.selectedReferantControl];
+      const etablissementsSelected: Etablissement[] = [formValues.selectedEtablissementsControl];
+      this.visit = new Visit(null, formValues.date.toISOString().split('T')[0], etablissementsSelected, referantsSelected, formValues.acc, formValues.Remarques, formValues.jeux, formValues.niveau, formValues.manifestation)
       this.visitService.addVisit(this.visit).subscribe({
         next: (data: Visit) => {
           this.visit = data;

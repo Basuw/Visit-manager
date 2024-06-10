@@ -1,5 +1,9 @@
 package com.backend.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +31,11 @@ public abstract class ProfesseurMapper implements com.backend.mapper.common.Mapp
     return professeur.getIdProfesseur();
     }
 
-    public ProfesseurEntity toStringEntity(int id){
-        return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Il n'existe pas de niveau : "+id));
+    public List<ProfesseurEntity> toIdEntity(int id){
+        return new ArrayList<ProfesseurEntity>(Arrays.asList(repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Il n'existe pas de niveau : "+id))));
     }
+
+    @Override
+    @Mapping(source = "id", target = "idProfesseur")
+    public abstract ProfesseurEntity toEntity(ProfesseurDTO dto);
 }

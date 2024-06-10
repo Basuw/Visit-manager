@@ -3,12 +3,11 @@ package com.backend.dto;
 import lombok.Data;
 
 @Data
-public class EtablissementDTO {
+public class VilleDTO {
 
-    private int id;
+    private int idVille;
 
     private String nom;
 
-    private VilleDTO ville;
-
+    private String departement;
 }

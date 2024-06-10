@@ -23,9 +23,9 @@ public class VisiteDTO {
 
     private String niveau;
 
-    private EtablissementDTO etablissement;
+    private List<EtablissementDTO> etablissement;
 
-    private ProfesseurDTO referant;
+    private List<ProfesseurDTO> referant;
 
     private List<JeuDTO> jeux;
 

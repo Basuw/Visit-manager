@@ -21,7 +21,7 @@ import {MatIconButton} from "@angular/material/button";
   styleUrl: './visit-table.component.scss'
 })
 export class VisitTableComponent implements OnInit, AfterViewInit{
-  displayedColumns: string[] = ['id', 'date', 'etablissement','referant','accompagnateur','remarques','jeux','niveaux','star'];
+  displayedColumns: string[] = ['id', 'date', 'etablissement','referant','accompagnateur','manifestation','remarques','jeux','niveaux','star'];
   dataSource!: MatTableDataSource<Visit>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @Output() editVisit = new EventEmitter<Visit>();
@@ -32,6 +32,7 @@ export class VisitTableComponent implements OnInit, AfterViewInit{
     this.visitService.getVisits().subscribe({
       next: (data: Visit[]) => {
         this.dataSource = new MatTableDataSource<Visit>(data);
+        console.log(data);
       },
       error: (error) => {
         console.error('Error fetching visits:', error);
@@ -53,7 +54,16 @@ export class VisitTableComponent implements OnInit, AfterViewInit{
   }
 
   delete(element: Visit) {
-    this.visitService.deteteVisit(element);
-    console.log('Delete:', element);
+    this.visitService.deteteVisit(element).subscribe({
+      next: (data: String) => {
+        console.log(data);  
+      },
+      error: (error) => {
+        console.error('Error fetching niveaux:', error);
+      },
+      complete: () => {
+        console.log('Niveaux fetch complete');
+      }
+    });
   }
 }

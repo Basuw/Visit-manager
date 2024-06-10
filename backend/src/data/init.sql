@@ -51,7 +51,6 @@ CREATE TABLE Jeu(
    id_jeu INTEGER,
    nom VARCHAR(50) ,
    dateAjout DATE,
-   id_professeur INTEGER NOT NULL,
    PRIMARY KEY(id_jeu)
 );
 
@@ -132,6 +131,7 @@ CREATE TABLE Jeu_Professeur(
 CREATE TABLE Visite_Etablissement(
     id_visite INTEGER,
     id_etablissement INTEGER,
+    PRIMARY KEY (id_visite, id_etablissement),
     FOREIGN KEY(id_visite) REFERENCES Visite(id_visite),
     FOREIGN KEY(id_etablissement) REFERENCES Etablissement(id_etablissement)
 );
@@ -164,8 +164,8 @@ INSERT INTO Professeur (id_professeur, nom, prenom) VALUES (0, 'PASTOR', 'Lucas'
 INSERT INTO Professeur (id_professeur, nom, prenom) VALUES (1, 'CHEMINAT', 'Michel');
 INSERT INTO Professeur (id_professeur, nom, prenom) VALUES (2, 'YON', 'Loïc');
 
-INSERT INTO Jeu (id_jeu, nom, dateAjout, id_professeur) VALUES (1, 'Code Master', '2024-01-15', 0);
-INSERT INTO Jeu (id_jeu, nom, dateAjout, id_professeur) VALUES (2, 'Bug Hunter', '2024-02-20', 0);
-INSERT INTO Jeu (id_jeu, nom, dateAjout, id_professeur) VALUES (3, 'AI Conquest', '2024-03-05', 0);
-INSERT INTO Jeu (id_jeu, nom, dateAjout, id_professeur) VALUES (4, 'Network Tycoon', '2024-04-10', 0);
-INSERT INTO Jeu (id_jeu, nom, dateAjout, id_professeur) VALUES (5, 'Cyber Defense', '2024-05-15', 0);
+INSERT INTO Jeu (id_jeu, nom, dateAjout) VALUES (1, 'Code Master', '2024-01-15');
+INSERT INTO Jeu (id_jeu, nom, dateAjout) VALUES (2, 'Bug Hunter', '2024-02-20');
+INSERT INTO Jeu (id_jeu, nom, dateAjout) VALUES (3, 'AI Conquest', '2024-03-05');
+INSERT INTO Jeu (id_jeu, nom, dateAjout) VALUES (4, 'Network Tycoon', '2024-04-10');
+INSERT INTO Jeu (id_jeu, nom, dateAjout) VALUES (5, 'Cyber Defense', '2024-05-15');

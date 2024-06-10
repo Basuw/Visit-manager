@@ -22,8 +22,8 @@ export class VisitService{
   public updateVisit(visit: Visit) {
 
   }
-  public deteteVisit(element: Visit) {
-    this.http.delete(this.url + element.id?.toString());
+  public deteteVisit(element: Visit): Observable<String> {
+    return this.http.delete<String>(this.url + element.id?.toString());
   }
   public getVisitById(id: number) {
 

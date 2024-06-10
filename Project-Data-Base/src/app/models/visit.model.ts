@@ -5,9 +5,9 @@ export class Visit{
   constructor(
     public id: number | null,
     public date: string,
-    public etablissement: Etablissement,
-    public referant: Referant,
-    public accompagnateur: string,
+    public etablissement: Etablissement[],
+    public referant: Referant[],
+    public accompagnateur: string[],
     public remarques: string,
     public jeux : string[],
     public niveau : string,

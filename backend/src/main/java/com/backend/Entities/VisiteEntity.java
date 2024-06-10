@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -36,4 +37,28 @@ public class VisiteEntity {
     @ManyToOne
     @JoinColumn(name="niveau", referencedColumnName = "niveau")
     private NiveauEntity niveau;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    @JoinTable(
+            name = "referent",
+            joinColumns = {  @JoinColumn(name = "id_visite")},
+            inverseJoinColumns = { @JoinColumn(name = "id_professeur") }
+    )
+    private List<ProfesseurEntity> professeurEntity;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    @JoinTable(
+            name = "visite_etablissement",
+            joinColumns = {  @JoinColumn(name = "id_visite")},
+            inverseJoinColumns = { @JoinColumn(name = "id_etablissement") }
+    )
+    private List<EtablissementEntity> etablissementEntity;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    @JoinTable(
+            name = "jeu_professeur",
+            joinColumns = {  @JoinColumn(name = "id_jeu")},
+            inverseJoinColumns = { @JoinColumn(name = "id_professeur") }
+    )
+    private List<JeuEntity> jeux;
 }

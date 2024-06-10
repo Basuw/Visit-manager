@@ -50,7 +50,7 @@ public class VisiteController{
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping({"id"})
+    @DeleteMapping("{id}")
     public ResponseEntity<String> delete(@PathVariable int id){
         service.delete(id);
         return new ResponseEntity<String>("Visite "+ id +" a été supprimé avec succès", HttpStatus.OK);
