@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  back:
+    build: backend
+    ports:
+      - "8080:8080"
+
+  front:
+    build: frontend
+    ports:
+      - "4200:4200"
+    depends_on:
+      - back
+
+  bdd:
+    build: data
+    environment:
+      POSTGRES_DB: Backend
+      POSTGRES_USER: api_client
+      POSTGRES_PASSWORD: ApiClient1234
+    ports:
+      - "5432:5432"
