@@ -23,10 +23,6 @@ cd project-bases-de-donnees
 docker-compose up -d
 ```
 
-## Usage
-
-
-
 ## Tech
 
 - Angular 18 🔥
