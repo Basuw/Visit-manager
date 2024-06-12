@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -25,4 +26,7 @@ public class ProfesseurEntity {
 
     @ManyToMany(mappedBy = "professeurEntity", fetch = FetchType.LAZY)
     private List<VisiteEntity> visits;
+
+    @OneToMany(mappedBy = "referent")
+    private List<JeuEntity> jeux;
 }

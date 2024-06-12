@@ -119,7 +119,8 @@ export class FormVisiteComponent implements OnInit, OnChanges {
       const referantsSelected: Referant[] = [formValues.selectedReferantControl];
       const etablissementsSelected: Etablissement[] = [formValues.selectedEtablissementsControl];
       const accompagnateurSelected: Accompagnateur[] = [formValues.acc];
-      this.visit = new Visit(null, formValues.date.toISOString().split('T')[0], etablissementsSelected, referantsSelected, accompagnateurSelected, formValues.Remarques, formValues.jeux, formValues.niveau, formValues.manifestation)
+      console.log(formValues);
+      this.visit = new Visit(null, formValues.date, etablissementsSelected, referantsSelected, accompagnateurSelected, formValues.Remarques, formValues.jeux, formValues.niveau, formValues.manifestation)
       this.visitService.addVisit(this.visit).subscribe({
         next: (data: Visit) => {
           this.visit = data;
@@ -140,13 +141,20 @@ export class FormVisiteComponent implements OnInit, OnChanges {
         this.formulaireForm.patchValue({
           date: this.visit.date,
           Remarques: this.visit.remarques,
-          acc: this.visit.accompagnateur,
+          acc: this.visit.accompagnateur[0],
           jeu: this.visit.jeux,
           niveau: this.visit.niveau,
-          selectedEtablissementsControl: this.visit.etablissement,
-          selectedReferantControl: this.visit.referant,
+          selectedEtablissementsControl: this.visit.etablissement[0],
+          selectedReferantControl: this.visit.referant[0],
+          manifestation: this.visit.manifestation
         });
+        this.formulaireForm.controls['selectedReferantControl'].setValue(this.visit.referant[0])
       }
+  }
 
+  compareValues(option1: any, option2: any): boolean {
+    // Comparaison personnalisée basée sur l'identifiant unique des options
+    return option1 && option2 ? option1.id === option2.id : option1 === option2;
   }
 }
+

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class JeuDTO {
 
-    private int idJeu;
+    private int id;
 
     private String nom;
 }
