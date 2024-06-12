@@ -50,7 +50,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Jeux</mat-label>
-      <mat-select formControlName="jeux" multiple>
+      <mat-select [(value)]="this.formulaireForm.value.jeux" [compareWith]="compareValues" formControlName="jeux" multiple>
         @for (jeu of jeux; track jeu.id) {
           <mat-option [value]="jeu">{{ jeu.nom }}</mat-option>
         }

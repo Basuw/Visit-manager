@@ -155,7 +155,7 @@ export class FormVisiteComponent implements OnInit, OnChanges {
           date: this.visit.date,
           Remarques: this.visit.remarques,
           acc: this.visit.accompagnateur[0],
-          jeu: this.visit.jeux,
+          jeux: this.visit.jeux,
           niveau: this.visit.niveau,
           selectedEtablissementsControl: this.visit.etablissement[0],
           selectedReferantControl: this.visit.referant[0],
