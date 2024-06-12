@@ -119,19 +119,32 @@ export class FormVisiteComponent implements OnInit, OnChanges {
       const referantsSelected: Referant[] = [formValues.selectedReferantControl];
       const etablissementsSelected: Etablissement[] = [formValues.selectedEtablissementsControl];
       const accompagnateurSelected: Accompagnateur[] = [formValues.acc];
-      console.log(formValues);
-      this.visit = new Visit(null, formValues.date, etablissementsSelected, referantsSelected, accompagnateurSelected, formValues.Remarques, formValues.jeux, formValues.niveau, formValues.manifestation)
-      this.visitService.addVisit(this.visit).subscribe({
-        next: (data: Visit) => {
-          this.visit = data;
-        },
-        error: (error) => {
-          console.error('Error fetching niveaux:', error);
-        },
-        complete: () => {
-          console.log('Niveaux fetch complete');
-        }
-      });
+      this.visit = new Visit(this.visit?.id, formValues.date, etablissementsSelected, referantsSelected, accompagnateurSelected, formValues.Remarques, formValues.jeux, formValues.niveau, formValues.manifestation)
+      if(this.visit.id != null && this.visit.id != undefined){
+        this.visitService.addVisit(this.visit).subscribe({
+          next: (data: Visit) => {
+            this.visit = data;
+          },
+          error: (error) => {
+            console.error('Error fetching niveaux:', error);
+          },
+          complete: () => {
+            console.log('Niveaux fetch complete');
+          }
+        });
+      }else{
+        this.visitService.addVisit(this.visit).subscribe({
+          next: (data: Visit) => {
+            this.visit = data;
+          },
+          error: (error) => {
+            console.error('Error fetching niveaux:', error);
+          },
+          complete: () => {
+            console.log('Niveaux fetch complete');
+          }
+        });
+      }
     } else {
       console.error('Formulaire invalide');
     }

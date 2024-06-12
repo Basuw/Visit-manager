@@ -44,9 +44,9 @@ public class VisiteController{
         return new ResponseEntity<VisiteDTO>(created, HttpStatus.CREATED);
     }
     
-    @PutMapping("{id}")
-    public ResponseEntity<VisiteDTO> put(@PathVariable int id, @RequestBody VisiteDTO dto) {
-        VisiteDTO updated = service.update(dto, id);
+    @PutMapping("")
+    public ResponseEntity<VisiteDTO> put(@RequestBody VisiteDTO dto) {
+        VisiteDTO updated = service.update(dto);
         return ResponseEntity.ok(updated);
     }
 

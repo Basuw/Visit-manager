@@ -4,7 +4,7 @@ import {Referant} from "./referant.model";
 
 export class Visit{
   constructor(
-    public id: number | null,
+    public id: number | null |undefined,
     public date: Date,
     public etablissement: Etablissement[],
     public referant: Referant[],
