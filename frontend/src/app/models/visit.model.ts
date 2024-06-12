@@ -1,3 +1,4 @@
+import { Accompagnateur } from "./accompagnateur-model";
 import {Etablissement} from "./etablissement.model";
 import {Referant} from "./referant.model";
 
@@ -7,7 +8,7 @@ export class Visit{
     public date: string,
     public etablissement: Etablissement[],
     public referant: Referant[],
-    public accompagnateur: string[],
+    public accompagnateur: Accompagnateur[],
     public remarques: string,
     public jeux : string[],
     public niveau : string,

@@ -19,6 +19,8 @@ import { NiveauService } from '../Service/niveau-service';
 import { ReferantService } from '../Service/referant-service';
 import { Jeu } from '../models/jeu-model';
 import { JeuService } from '../Service/jeu-service';
+import { Accompagnateur } from '../models/accompagnateur-model';
+import { AccompagnateurService } from '../Service/accompagnateur-service';
 
 /** @title Simple form field */
 @Component({
@@ -33,11 +35,12 @@ export class FormVisiteComponent implements OnInit, OnChanges {
   formulaireForm: FormGroup;
   etablissements: Etablissement[] = [];
   referants: Referant[] = [];
+  accompagnateurs: Accompagnateur[] = [];
   jeux: Jeu[] = [];
   niveaux: Niveau[] = [];
   @Input() visit?: Visit;
 
-  constructor(private fb: FormBuilder, private etablissementService: EtablissementService, private niveauService: NiveauService, private referantService: ReferantService, private jeuService: JeuService, private visitService: VisitService) {
+  constructor(private fb: FormBuilder, private etablissementService: EtablissementService, private niveauService: NiveauService, private referantService: ReferantService, private jeuService: JeuService, private visitService: VisitService, private accompagnateurService: AccompagnateurService) {
     this.formulaireForm = this.fb.group({
       date: ['', Validators.required],
       Remarques: ['', []],
@@ -97,6 +100,17 @@ export class FormVisiteComponent implements OnInit, OnChanges {
         console.log('Niveaux fetch complete');
       }
     });
+    this.accompagnateurService.getAll().subscribe({
+      next: (data: Accompagnateur[]) => {
+        this.accompagnateurs = data;
+      },
+      error: (error) => {
+        console.error('Error fetching niveaux:', error);
+      },
+      complete: () => {
+        console.log('Niveaux fetch complete');
+      }
+    });
   }
 
   onSubmit() {
@@ -104,7 +118,8 @@ export class FormVisiteComponent implements OnInit, OnChanges {
       const formValues = this.formulaireForm.value;
       const referantsSelected: Referant[] = [formValues.selectedReferantControl];
       const etablissementsSelected: Etablissement[] = [formValues.selectedEtablissementsControl];
-      this.visit = new Visit(null, formValues.date.toISOString().split('T')[0], etablissementsSelected, referantsSelected, formValues.acc, formValues.Remarques, formValues.jeux, formValues.niveau, formValues.manifestation)
+      const accompagnateurSelected: Accompagnateur[] = [formValues.acc];
+      this.visit = new Visit(null, formValues.date.toISOString().split('T')[0], etablissementsSelected, referantsSelected, accompagnateurSelected, formValues.Remarques, formValues.jeux, formValues.niveau, formValues.manifestation)
       this.visitService.addVisit(this.visit).subscribe({
         next: (data: Visit) => {
           this.visit = data;

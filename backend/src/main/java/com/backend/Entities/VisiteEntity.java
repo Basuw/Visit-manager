@@ -48,6 +48,14 @@ public class VisiteEntity {
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL )
     @JoinTable(
+            name = "accompagne",
+            joinColumns = {  @JoinColumn(name = "id_visite")},
+            inverseJoinColumns = { @JoinColumn(name = "id_accompagnateur") }
+    )
+    private List<AccompagnateurEntity> accompagnateurEntity;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    @JoinTable(
             name = "visite_etablissement",
             joinColumns = {  @JoinColumn(name = "id_visite")},
             inverseJoinColumns = { @JoinColumn(name = "id_etablissement") }
