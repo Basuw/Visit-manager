@@ -1,12 +1,9 @@
 package com.backend.mapper;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-
 import org.mapstruct.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.mapstruct.Mapping;
 
 import com.backend.Entities.JeuEntity;
 import com.backend.Repositories.JeuRepository;
@@ -21,7 +18,11 @@ public abstract class JeuMapper implements com.backend.mapper.common.Mapper<JeuD
     private JeuRepository repository;
 
     @Override
+    @Mapping(target = "id", source = "idJeu")
+    public abstract JeuDTO toDto(JeuEntity entity);
+
+    @Override
     public JeuEntity toEntity(JeuDTO dto){
-        return repository.findById(dto.getIdJeu()).orElseThrow(() -> new EntityNotFoundException("Il n'existe pas de niveau : "+dto.getIdJeu()));
+        return repository.findById(dto.getId()).orElseThrow(() -> new EntityNotFoundException("Il n'existe pas de jeu : "+dto.getId()));
     }
 }

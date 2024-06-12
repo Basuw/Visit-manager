@@ -19,14 +19,18 @@
       <input matInput formControlName="manifestation">
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Accompagnateur</mat-label>
-      <input matInput formControlName="acc">
+      <mat-select [(value)]="this.formulaireForm.value.acc" [compareWith]="compareValues" formControlName="acc">
+        @for (acc of accompagnateurs; track acc.id) {
+          <mat-option [value]="acc">{{ acc.nom }} {{ acc.prenom }}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Etablissement</mat-label>
-      <mat-select formControlName="selectedEtablissementsControl">
+      <mat-select [(value)]="this.formulaireForm.value.selectedEtablissementsControl" [compareWith]="compareValues" formControlName="selectedEtablissementsControl">
 
         @for (etablissement of etablissements; track etablissement.id) {
           <mat-option [value]="etablissement">{{ etablissement.nom }}</mat-option>
@@ -36,7 +40,7 @@
 
     <mat-form-field>
       <mat-label>Référent</mat-label>
-      <mat-select formControlName="selectedReferantControl">
+      <mat-select [(value)]="this.formulaireForm.value.selectedReferantControl" [compareWith]="compareValues" formControlName="selectedReferantControl">
         @for (ref of referants; track ref.id) {
           <mat-option [value]="ref">{{ ref.nom }} {{ ref.prenom }}</mat-option>
         }
@@ -46,8 +50,8 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Jeux</mat-label>
-      <mat-select formControlName="jeux" multiple>
-        @for (jeu of jeux; track jeu.idJeu) {
+      <mat-select [(value)]="this.formulaireForm.value.jeux" [compareWith]="compareValues" formControlName="jeux" multiple>
+        @for (jeu of jeux; track jeu.id) {
           <mat-option [value]="jeu">{{ jeu.nom }}</mat-option>
         }
       </mat-select>
@@ -64,6 +68,4 @@
 
     <button id="submit" mat-raised-button type="submit">Soumettre</button>
   </form>
-
-  <h1>{{visit?.accompagnateur}}</h1>
 </div>

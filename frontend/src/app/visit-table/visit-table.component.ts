@@ -54,16 +54,20 @@ export class VisitTableComponent implements OnInit, AfterViewInit{
   }
 
   delete(element: Visit) {
+    const index = this.dataSource.data.findIndex(data => data === element);
     this.visitService.deteteVisit(element).subscribe({
       next: (data: String) => {
-        console.log(data);  
       },
       error: (error) => {
         console.error('Error fetching niveaux:', error);
       },
       complete: () => {
-        console.log('Niveaux fetch complete');
+        console.log("successuflly deleted ");
       }
     });
+    this.dataSource.data.splice(index, 1);
+    this.dataSource.data = [...this.dataSource.data];
+    this.dataSource.connect();
+    
   }
 }

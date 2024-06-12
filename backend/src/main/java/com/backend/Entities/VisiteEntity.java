@@ -38,7 +38,7 @@ public class VisiteEntity {
     @JoinColumn(name="niveau", referencedColumnName = "niveau")
     private NiveauEntity niveau;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    @ManyToMany(fetch = FetchType.LAZY )
     @JoinTable(
             name = "referent",
             joinColumns = {  @JoinColumn(name = "id_visite")},
@@ -46,7 +46,15 @@ public class VisiteEntity {
     )
     private List<ProfesseurEntity> professeurEntity;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    @ManyToMany(fetch = FetchType.LAZY )
+    @JoinTable(
+            name = "accompagne",
+            joinColumns = {  @JoinColumn(name = "id_visite")},
+            inverseJoinColumns = { @JoinColumn(name = "id_accompagnateur") }
+    )
+    private List<AccompagnateurEntity> accompagnateurEntity;
+
+    @ManyToMany(fetch = FetchType.LAZY )
     @JoinTable(
             name = "visite_etablissement",
             joinColumns = {  @JoinColumn(name = "id_visite")},
@@ -54,11 +62,11 @@ public class VisiteEntity {
     )
     private List<EtablissementEntity> etablissementEntity;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+    @ManyToMany(fetch = FetchType.LAZY )
     @JoinTable(
-            name = "jeu_professeur",
-            joinColumns = {  @JoinColumn(name = "id_jeu")},
-            inverseJoinColumns = { @JoinColumn(name = "id_professeur") }
+            name = "contient",
+            joinColumns = {  @JoinColumn(name = "id_visite")},
+            inverseJoinColumns = { @JoinColumn(name = "id_jeu") }
     )
     private List<JeuEntity> jeux;
 }

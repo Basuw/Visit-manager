@@ -19,8 +19,8 @@ export class VisitService{
     console.log(visit);
     return this.http.post<Visit>(this.url, visit);
   }
-  public updateVisit(visit: Visit) {
-
+  public updateVisit(visit: Visit): Observable<Visit> {
+    return this.http.put<Visit>(this.url, visit);
   }
   public deteteVisit(element: Visit): Observable<String> {
     return this.http.delete<String>(this.url + element.id?.toString());

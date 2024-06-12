@@ -27,7 +27,8 @@ public class VisiteDTO {
 
     private List<ProfesseurDTO> referant;
 
+    private List<AccompagnateurDTO> accompagnateur;
+
     private List<JeuDTO> jeux;
 
-    private String accompagnateur;
 }

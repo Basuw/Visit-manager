@@ -29,7 +29,7 @@
     <!-- accompagnateur Column -->
     <ng-container matColumnDef="accompagnateur">
       <th mat-header-cell *matHeaderCellDef> Accompagnateur </th>
-      <td mat-cell *matCellDef="let element"> {{element.accompagnateur}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.accompagnateur[0]?.nom }} {{element.accompagnateur[0]?.prenom}}</td>
     </ng-container>
 
     <!-- remarques Column -->
