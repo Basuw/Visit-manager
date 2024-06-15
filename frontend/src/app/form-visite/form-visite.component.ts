@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
 import {MatCheckbox} from "@angular/material/checkbox";
@@ -39,6 +39,7 @@ export class FormVisiteComponent implements OnInit, OnChanges {
   jeux: Jeu[] = [];
   niveaux: Niveau[] = [];
   @Input() visit?: Visit;
+  @Output() onUpdate = new EventEmitter<boolean>();
 
   constructor(private fb: FormBuilder, private etablissementService: EtablissementService, private niveauService: NiveauService, private referantService: ReferantService, private jeuService: JeuService, private visitService: VisitService, private accompagnateurService: AccompagnateurService) {
     this.formulaireForm = this.fb.group({
@@ -120,7 +121,7 @@ export class FormVisiteComponent implements OnInit, OnChanges {
       const etablissementsSelected: Etablissement[] = [formValues.selectedEtablissementsControl];
       const accompagnateurSelected: Accompagnateur[] = [formValues.acc];
       this.visit = new Visit(this.visit?.id, formValues.date, etablissementsSelected, referantsSelected, accompagnateurSelected, formValues.Remarques, formValues.jeux, formValues.niveau, formValues.manifestation)
-      if(this.visit.id != null && this.visit.id != undefined){
+      if(this.visit.id === null || this.visit.id === undefined){
         this.visitService.addVisit(this.visit).subscribe({
           next: (data: Visit) => {
             this.visit = data;
@@ -130,10 +131,11 @@ export class FormVisiteComponent implements OnInit, OnChanges {
           },
           complete: () => {
             console.log('Niveaux fetch complete');
+            this.onUpdate.emit(true);
           }
         });
       }else{
-        this.visitService.addVisit(this.visit).subscribe({
+        this.visitService.updateVisit(this.visit).subscribe({
           next: (data: Visit) => {
             this.visit = data;
           },
@@ -142,6 +144,8 @@ export class FormVisiteComponent implements OnInit, OnChanges {
           },
           complete: () => {
             console.log('Niveaux fetch complete');
+            console.log("edit submit");
+            this.onUpdate.emit(true);
           }
         });
       }

@@ -29,8 +29,9 @@ public class VisiteService extends ReadService<VisiteDTO, VisiteEntity>{
         if(!repository.existsById(dto.getId())){
             throw new EntityNotFoundException("Il n'existe pas de visite avec l'id "+ dto.getId());
         }
-
-        VisiteEntity updated = repository.save(mapper.toEntity(dto));
+        VisiteEntity entity = repository.findById(dto.getId()).get();
+        VisiteEntity updatedEntity = mapper.updateEntity(entity, dto);
+        VisiteEntity updated = repository.save(updatedEntity);
         return mapper.toDto(updated);
     }
 

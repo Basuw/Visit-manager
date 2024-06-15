@@ -10,8 +10,11 @@
 -- à cause de la visite V.
 
 -- Quels triggers faut-il créer ? quelles actions sur quelles tables ?
+-- Il faut créer un trigger sur la table jeu qui se déclenche avant la mise a jour de la colonne niveaux.
 
 -- Créer les triggers.
+
+
 
 -- Proposer des tests pour montrer que les triggers créés sont efficaces.
 
@@ -19,3 +22,5 @@
 
 -- Quels autres triggers faudrait-il créér pour vérifier la concordance des niveaux
 -- entre les jeux et les visites ? (ne pas créer les triggers !)
+-- Il faudrait également créer un trigger sur la table visite pour s'assurer que la modification du niveau de la visite reste cohérente.
+-- A la selection des jeux pour la visite il en faudrait également un pour etre sur que les jeux ajoutés soient du bon niveau.

@@ -1,5 +1,5 @@
-<app-form-visite [visit]="selectedVisit"></app-form-visite>
+<app-form-visite [visit]="selectedVisit" (onUpdate)="updateTable($event)"></app-form-visite>
 <!--(
 <app-etablissement-table></app-etablissement-table>
 -->
-<app-visit-table (editVisit)="editVisit($event)"></app-visit-table>
+<app-visit-table (editVisit)="editVisit($event)" [toUpdate]="toUpdate" (canBeEditable)="updatable($event)"></app-visit-table>

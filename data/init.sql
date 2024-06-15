@@ -10,13 +10,13 @@ CREATE TABLE Ville(
 );
 
 CREATE TABLE Accompagnateur(
-   IdAccompagnateur INTEGER,
+   id_accompagnateur INTEGER,
    nom VARCHAR(50) ,
    prenom VARCHAR(50) ,
-   telephone SMALLINT,
+   telephone BIGINT,
    mail VARCHAR(50) ,
    fonction VARCHAR(50) ,
-   PRIMARY KEY(IdAccompagnateur)
+   PRIMARY KEY(id_accompagnateur)
 );
 
 CREATE TABLE Professeur(
@@ -81,10 +81,10 @@ CREATE TABLE Partie(
 );
 
 CREATE TABLE Accompagne(
-   IdAccompagnateur INTEGER,
+   id_accompagnateur INTEGER,
    id_visite INTEGER,
-   PRIMARY KEY(IdAccompagnateur, id_visite),
-   FOREIGN KEY(IdAccompagnateur) REFERENCES Accompagnateur(IdAccompagnateur),
+   PRIMARY KEY(id_accompagnateur, id_visite),
+   FOREIGN KEY(id_accompagnateur) REFERENCES Accompagnateur(id_accompagnateur),
    FOREIGN KEY(id_visite) REFERENCES Visite(id_visite)
 );
 
@@ -169,3 +169,9 @@ INSERT INTO Jeu (id_jeu, nom, dateAjout) VALUES (2, 'Bug Hunter', '2024-02-20');
 INSERT INTO Jeu (id_jeu, nom, dateAjout) VALUES (3, 'AI Conquest', '2024-03-05');
 INSERT INTO Jeu (id_jeu, nom, dateAjout) VALUES (4, 'Network Tycoon', '2024-04-10');
 INSERT INTO Jeu (id_jeu, nom, dateAjout) VALUES (5, 'Cyber Defense', '2024-05-15');
+
+INSERT INTO Accompagnateur (id_accompagnateur, nom, prenom, telephone, mail, fonction) VALUES
+(1, 'Dupont', 'Jean', 123456789, 'jean.dupont@example.com', 'Professeur de Mathématiques'),
+(2, 'Martin', 'Marie', 234567890, 'marie.martin@example.com', 'Professeur de Physique'),
+(3, 'Bernard', 'Pierre', 345678901, 'pierre.bernard@example.com', 'Professeur de Chimie'),
+(4, 'Dubois', 'Luc', 456789012, 'luc.dubois@example.com', 'Professeur de Biologie');
