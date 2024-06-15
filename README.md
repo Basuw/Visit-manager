@@ -23,6 +23,9 @@ cd project-bases-de-donnees
 docker-compose up -d
 ```
 
+3. Open a Web IDE and paste the following URL :
+http://localhost:4200
+
 ## Tech
 
 - Angular 18 🔥

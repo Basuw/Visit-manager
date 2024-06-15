@@ -16,7 +16,17 @@ import {Visit} from "./models/visit.model";
 export class AppComponent {
   title = 'Project-Data-Base';
   selectedVisit?: Visit;
+  toUpdate?: boolean;
 
   editVisit(visit: Visit) {
     this.selectedVisit = visit;
-  }}
+  }
+
+  updateTable(bool: boolean){
+    this.toUpdate = bool;
+  }
+
+  updatable(bool: boolean){
+    this.toUpdate = false;
+  }
+}

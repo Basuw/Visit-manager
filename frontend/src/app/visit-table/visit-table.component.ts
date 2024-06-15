@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild} from '@angular/core';
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatIcon} from "@angular/material/icon";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
@@ -20,10 +20,12 @@ import {MatIconButton} from "@angular/material/button";
   templateUrl: './visit-table.component.html',
   styleUrl: './visit-table.component.scss'
 })
-export class VisitTableComponent implements OnInit, AfterViewInit{
+export class VisitTableComponent implements OnInit, AfterViewInit, OnChanges{
   displayedColumns: string[] = ['id', 'date', 'etablissement','referant','accompagnateur','manifestation','remarques','jeux','niveaux','star'];
   dataSource!: MatTableDataSource<Visit>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @Input() toUpdate?: boolean;
+  @Output() canBeEditable = new EventEmitter<boolean>();
   @Output() editVisit = new EventEmitter<Visit>();
 
   constructor(public dialog: MatDialog, private visitService: VisitService) {}
@@ -68,6 +70,28 @@ export class VisitTableComponent implements OnInit, AfterViewInit{
     this.dataSource.data.splice(index, 1);
     this.dataSource.data = [...this.dataSource.data];
     this.dataSource.connect();
-    
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.toUpdate === false){
+      return;
+    }
+
+    this.visitService.getVisits().subscribe({
+      next: (data: Visit[]) => {
+        this.dataSource.data = data;
+        this.dataSource.connect();
+        console.log("changement");
+        this.toUpdate = false;
+        this.canBeEditable.emit(true);
+      },
+      error: (error) => {
+        console.error('Error fetching visits:', error);
+      },
+      complete: () => {
+        console.log('visits fetch complete');
+      }
+    });
+
   }
 }

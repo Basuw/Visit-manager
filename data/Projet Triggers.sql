@@ -70,6 +70,7 @@ DELETE FROM Est_adapte WHERE id_jeu = 7 AND niveau = 'superieur'; -- devrait éc
 -- Quels autres triggers faudrait-il créér pour vérifier la concordance des niveaux
 -- entre les jeux et les visites ? (ne pas créer les triggers !)
 
+
 -- Autres triggers à créer pour vérifier la concordance des niveaux entre les jeux et les visites :
 -- 1. Trigger sur l'insertion/mise à jour de visites : Vérifier que le niveau de la visite est associé à tous les jeux contenus dans cette visite.
 -- 2. Trigger sur l'insertion/mise à jour de la table 'Contient' : Vérifier que le niveau de la visite est un niveau associé au jeu ajouté.
