@@ -6,4 +6,4 @@ java-build:
   image: maven:3.8-openjdk-11
   stage: build
   script:
-    - mvn package -DskipTests=true
+    - mvn package -f backend/pom.xml -DskipTests=true
