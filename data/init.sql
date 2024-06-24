@@ -13,7 +13,7 @@ CREATE TABLE Accompagnateur(
    id_accompagnateur INTEGER,
    nom VARCHAR(50) ,
    prenom VARCHAR(50) ,
-   telephone BIGINT,
+   telephone INTEGER,
    mail VARCHAR(50) ,
    fonction VARCHAR(50) ,
    PRIMARY KEY(id_accompagnateur)

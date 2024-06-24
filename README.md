@@ -20,7 +20,7 @@ git clone https://gitlab.isima.fr/bajacqueli/project-bases-de-donnees.git
 2. Start the modules
 ```bash
 cd project-bases-de-donnees
-docker-compose up -d
+docker-compose build
 ```
 
 3. Open a browser and paste the following URL :
