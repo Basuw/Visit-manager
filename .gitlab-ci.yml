@@ -1,6 +1,0 @@
-stages :
-    - build
-
-docker-build:
-    stage: build
-    script: docker-compose up -d
