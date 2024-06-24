@@ -3,4 +3,4 @@ stages :
 
 docker-build:
     stage: build
-    script: docker-compose -d
+    script: docker-compose up -d
