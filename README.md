@@ -23,7 +23,7 @@ cd project-bases-de-donnees
 docker-compose up -d
 ```
 
-3. Open a Web IDE and paste the following URL :
+3. Open a browser and paste the following URL :
 http://localhost:4200
 
 ## Tech
